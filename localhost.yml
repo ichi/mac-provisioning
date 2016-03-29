@@ -1,0 +1,55 @@
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  roles:
+    - homebrew
+    - homebrew-cask
+
+  vars:
+    homebrew_repositories:
+
+    homebrew_packages:
+      - awscli
+      - colordiff
+      - ctags
+      - curl
+      - direnv
+      - emacs
+      - git
+      - httpie
+      - jq
+      - mysql
+      - peco
+      - postgresql
+      - pstree
+      - redis
+      - sqlite
+      - ssh-copy-id
+      - terminal-notifier
+      - tree
+      - wget
+
+    homebrew_cask_repositories:
+      - caskroom/versions
+      - caskroom/fonts
+
+    homebrew_cask_packages:
+      - appcleaner
+      - asepsis
+      - atom
+      - bettertouchtool
+      - clipmenu
+      - dash
+      - dropbox
+      - google-chrome
+      - google-japanese-ime
+      - iterm2
+      - karabiner
+      - mailplane
+      - slack
+      - teleport
+      - totalfinder
+      - totalspaces
+      - totalterminal
+      - vagrant
+      - virtualbox
