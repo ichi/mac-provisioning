@@ -27,3 +27,17 @@
     state={{ item.state | default('present') }}
   with_items: "{{homebrew_cask_packages}}"
   when: homebrew_cask_packages
+  register: homebrew_cask_results
+
+- name: brew infoを記録するディレクトリ作成
+  tags:
+    - homebrew
+    - homebrew-cask
+  file: path={{brew_cask_info_dir}} state=directory
+
+- name: brew infoを記録
+  tags:
+    - homebrew
+    - homebrew-cask
+  shell: brew cask info {{item}} > {{brew_cask_info_dir}}/{{item}}
+  with_items: "{{homebrew_cask_results.results | selectattr('changed') | map(attribute='item') | list}}"

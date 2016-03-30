@@ -26,3 +26,17 @@
     }}
   with_items: "{{homebrew_packages}}"
   when: homebrew_packages
+  register: homebrew_results
+
+- name: brew infoを記録するディレクトリ作成
+  tags:
+    - homebrew
+    - homebrew-base
+  file: path={{brew_info_dir}} state=directory
+
+- name: brew infoを記録
+  tags:
+    - homebrew
+    - homebrew-base
+  shell: brew info {{item}} > {{brew_info_dir}}/{{item}}
+  with_items: "{{homebrew_results.results | selectattr('changed') | map(attribute='item') | list}}"
