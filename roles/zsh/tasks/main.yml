@@ -1,0 +1,44 @@
+- name: homebrewでinstall
+  tags:
+    - zsh
+  homebrew: name={{item}} state=latest
+  with_items:
+    - zsh
+    - reattach-to-user-namespace
+    - tmux
+    - z
+
+- name: Pull dotfiles
+  tags:
+    - zsh
+    - dotfiles
+  git: repo={{dotfiles_repo}} dest={{dotfiles_dir}}
+    accept_hostkey=yes
+    force=yes
+
+- name: init.shを+xに
+  tags:
+    - zsh
+    - dotfiles
+  file: path={{dotfiles_dir}}/init.sh mode=a+x
+
+- name: Init dotfiles
+  tags:
+    - zsh
+    - dotfiles
+  shell: ./init.sh
+    chdir={{dotfiles_dir}}
+
+- name: /etc/shellsにpath追加
+  tags:
+    - zsh
+  become: true
+  lineinfile: dest=/etc/shells state=present
+    regexp="^{{zsh_path}}$"
+    line="{{zsh_path}}"
+
+- name: chshでログインシェル変更
+  tags:
+    - zsh
+  become: true
+  shell: chsh -s {{zsh_path}}

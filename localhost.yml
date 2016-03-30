@@ -4,6 +4,7 @@
   roles:
     - homebrew
     - homebrew-cask
+    - zsh
 
   vars:
     homebrew_repositories:
