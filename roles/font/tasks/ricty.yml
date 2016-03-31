@@ -17,6 +17,7 @@
     - font-ricty
   shell: brew info ricty | grep '\$' | sed -e 's/  \$ //'
   register: ricty_install_commands
+  when: get_ricty | changed
 
 - name: Install Ricty
   tags:
@@ -24,4 +25,4 @@
     - font-ricty
   shell: "{{item}}"
   with_items: "{{ricty_install_commands.stdout_lines}}"
-  when: get_ricty | changed and ricty_install_commands | changed
+  when: ricty_install_commands | changed
