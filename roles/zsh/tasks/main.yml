@@ -3,9 +3,16 @@
     - zsh
     - homebrew
     - homebrew-base
-  homebrew: name={{item}} state=latest
+  homebrew: >
+    name={{ item.name | default(item) }}
+    state={{ item.state | default('latest') }}
+    install_options={{
+      item.install_options | default() | join(',')
+      if item.install_options is not string
+      else item.install_options
+    }}
   with_items:
-    - zsh
+    - {name: zsh, install_options: disable-etcdir}
     - reattach-to-user-namespace
     - tmux
     - z
@@ -41,9 +48,11 @@
   lineinfile: dest=/etc/shells state=present
     regexp="^{{zsh_path}}$"
     line="{{zsh_path}}"
+  register: etc_shells
 
 - name: chshでログインシェル変更
   tags:
     - zsh
   become: true
   shell: chsh -s {{zsh_path}}
+  when: etc_shells | changed
