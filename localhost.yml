@@ -41,13 +41,15 @@
       - clipmenu
       - dash
       - dropbox
+      - firefox
       - google-chrome
       - google-japanese-ime
+      - istat-menus
       - iterm2
       - karabiner
       - mailplane
       - slack
-      - teleport
+      # - teleport
       - totalfinder
       - totalspaces
       - totalterminal
