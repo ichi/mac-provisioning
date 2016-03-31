@@ -10,6 +10,7 @@
     homebrew_repositories:
 
     homebrew_packages:
+      - ansible
       - awscli
       - colordiff
       - ctags
