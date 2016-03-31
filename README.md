@@ -21,7 +21,7 @@ $ HOMEBREW_CASK_OPTS="--appdir=/Applications" ansible-playbook -i hosts localhos
 
 ### Terminal
 
-- `~/Dropbox/_private/mac/Visor.terminal`のプロファイル使う
+- `~/Dropbox/_private/mac/Terminal/Terminal/Visor.terminal`のプロファイル使う
 
 ### iTerm2
 
@@ -30,3 +30,6 @@ $ HOMEBREW_CASK_OPTS="--appdir=/Applications" ansible-playbook -i hosts localhos
 ### Dash
 
 - 設定の`Syncing`で`~/Dropbox/_private/mac/Dash`指定
+
+### iStat Menus
+- Import Settingsで`~/Dropbox/_private/mac/iStatMenus/iStat Menus Settings.ismp`
