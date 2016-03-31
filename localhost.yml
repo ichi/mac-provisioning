@@ -6,6 +6,7 @@
     - homebrew-cask
     - font
     - zsh
+    - ruby
 
   vars:
     homebrew_repositories:

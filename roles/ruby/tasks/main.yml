@@ -1,0 +1,61 @@
+- name: Install dependent packages
+  tags:
+    - ruby
+    - rbenv
+  homebrew: >
+    name={{ item.name | default(item) }}
+    state={{ item.state | default('latest') }}
+    install_options={{
+      item.install_options | default() | join(',')
+      if item.install_options is not string
+      else item.install_options
+    }}
+  with_items:
+    - openssl
+    - {name: openssl, state: linked, install_options: force}
+    - readline
+    - rbenv
+    - ruby-build
+
+- name: Install rbenv
+  tags:
+    - ruby
+    - rbenv
+  homebrew: >
+    name={{ item.name | default(item) }}
+    state={{ item.state | default('latest') }}
+  with_items:
+    - rbenv
+    - ruby-build
+  register: install_rbenv
+
+- name: Init rbenv
+  tags:
+    - ruby
+    - rbenv
+  shell: eval "$(rbenv init -)"
+  when: install_rbenv | changed
+
+- name: Install ruby versions
+  tags:
+    - ruby
+    - rbenv
+  shell: rbenv install -s {{item}}
+  with_items: "{{ruby_versions}}"
+  register: install_ruby_versions
+  changed_when: '"Installed ruby" in install_ruby_versions.stderr'
+
+- name: Set rbenv global
+  tags:
+    - ruby
+    - rbenv
+  shell: rbenv global `rbenv versions | sed -E 's/\*? *([^ ]+).*$/\1/' | tail -1`
+  when: install_ruby_versions | changed
+
+- name: Install bundler gem
+  tags:
+    - ruby
+    - rbenv
+  shell: RBENV_VERSION={{item}} gem install bundler
+  with_items: "{{ruby_versions}}"
+  when: install_ruby_versions | changed
