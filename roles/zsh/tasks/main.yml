@@ -16,12 +16,14 @@
   git: repo={{dotfiles_repo}} dest={{dotfiles_dir}}
     accept_hostkey=yes
     force=yes
+  register: pull_dotfiles
 
 - name: init.shを+xに
   tags:
     - zsh
     - dotfiles
   file: path={{dotfiles_dir}}/init.sh mode=a+x
+  when: pull_dotfiles | changed
 
 - name: Init dotfiles
   tags:
@@ -29,6 +31,7 @@
     - dotfiles
   shell: ./init.sh
     chdir={{dotfiles_dir}}
+  when: pull_dotfiles | changed
 
 - name: /etc/shellsにpath追加
   tags:
