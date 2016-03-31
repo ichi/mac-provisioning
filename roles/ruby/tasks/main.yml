@@ -36,12 +36,11 @@
   shell: eval "$(rbenv init -)"
   when: install_rbenv | changed
 
-- name: Install ruby versions
+- name: Install latest version of ruby
   tags:
     - ruby
     - rbenv
-  shell: rbenv install -s {{item}}
-  with_items: "{{ruby_versions}}"
+  shell: rbenv install -s $(rbenv install -l | grep -v - | tail -1)
   register: install_ruby_versions
   changed_when: '"Installed ruby" in install_ruby_versions.stderr'
 
@@ -49,13 +48,12 @@
   tags:
     - ruby
     - rbenv
-  shell: rbenv global `rbenv versions | sed -E 's/\*? *([^ ]+).*$/\1/' | tail -1`
+  shell: rbenv global $(rbenv install -l | grep -v - | tail -1)
   when: install_ruby_versions | changed
 
 - name: Install bundler gem
   tags:
     - ruby
     - rbenv
-  shell: RBENV_VERSION={{item}} gem install bundler
-  with_items: "{{ruby_versions}}"
+  gem: name=bundler state=latest
   when: install_ruby_versions | changed
