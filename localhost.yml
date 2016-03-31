@@ -9,6 +9,7 @@
 
   vars:
     homebrew_repositories:
+      - homebrew/versions
 
     homebrew_packages:
       - ansible
