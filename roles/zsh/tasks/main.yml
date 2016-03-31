@@ -2,6 +2,7 @@
   tags:
     - zsh
     - homebrew
+    - homebrew-base
   homebrew: name={{item}} state=latest
   with_items:
     - zsh
