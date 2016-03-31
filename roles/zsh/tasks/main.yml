@@ -1,6 +1,7 @@
 - name: homebrewでinstall
   tags:
     - zsh
+    - homebrew
   homebrew: name={{item}} state=latest
   with_items:
     - zsh
