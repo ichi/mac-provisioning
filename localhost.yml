@@ -4,6 +4,7 @@
   roles:
     - homebrew
     - homebrew-cask
+    - font
     - zsh
 
   vars:
