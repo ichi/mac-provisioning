@@ -2,28 +2,26 @@
   tags:
     - ruby
     - rbenv
-  homebrew: >
-    name={{ item.name | default(item) }}
-    state={{ item.state | default('latest') }}
-    install_options={{
-      item.install_options | default() | join(',')
-      if item.install_options is not string
-      else item.install_options
-    }}
+  homebrew: name={{item}} state=latest
   with_items:
     - openssl
-    - {name: openssl, state: linked, install_options: force}
     - readline
+  register: install_dependent_packages
+
+- name: Link libraries
+  tags:
+    - ruby
     - rbenv
-    - ruby-build
+  homebrew: name={{item}} state=linked install_options=force
+  with_items:
+    - openssl
+  when: install_dependent_packages | changed
 
 - name: Install rbenv
   tags:
     - ruby
     - rbenv
-  homebrew: >
-    name={{ item.name | default(item) }}
-    state={{ item.state | default('latest') }}
+  homebrew: name={{item}} state=latest
   with_items:
     - rbenv
     - ruby-build
@@ -41,19 +39,19 @@
     - ruby
     - rbenv
   shell: rbenv install -s $(rbenv install -l | grep -v - | tail -1)
-  register: install_ruby_versions
-  changed_when: '"Installed ruby" in install_ruby_versions.stderr'
+  register: install_ruby
+  changed_when: '"Installed ruby" in install_ruby.stderr'
 
 - name: Set rbenv global
   tags:
     - ruby
     - rbenv
   shell: rbenv global $(rbenv install -l | grep -v - | tail -1)
-  when: install_ruby_versions | changed
+  when: install_ruby | changed
 
 - name: Install bundler gem
   tags:
     - ruby
     - rbenv
   gem: name=bundler state=latest
-  when: install_ruby_versions | changed
+  when: install_ruby | changed
