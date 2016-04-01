@@ -1,0 +1,11 @@
+- name: Install python
+  tags:
+    - python
+  homebrew: name=python state=latest
+  register: install_python
+
+- name: Update pip
+  tags:
+    - python
+  shell: pip install --upgrade pip setuptools
+  when: install_python | changed
