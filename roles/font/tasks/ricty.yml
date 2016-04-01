@@ -25,4 +25,4 @@
     - font-ricty
   shell: "{{item}}"
   with_items: "{{ricty_install_commands.stdout_lines}}"
-  when: ricty_install_commands | changed
+  when: get_ricty | changed and ricty_install_commands | changed
