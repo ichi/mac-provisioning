@@ -1,0 +1,22 @@
+- name: Tap php repository
+  tags:
+    - php
+  homebrew_tap: tap=homebrew/php state=present
+
+- name: Install phpbrew
+  tags:
+    - php
+  homebrew: name=phpbrew state=latest
+  register: install_phpbrew
+
+- name: Init phpbrew
+  tags:
+    - php
+  shell: phpbrew init
+  when: install_phpbrew | changed
+
+- name: Update phpbrew
+  tags:
+    - php
+  shell: phpbrew self-update
+  when: install_phpbrew | changed
