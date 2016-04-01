@@ -12,3 +12,20 @@
   homebrew: name="{{item}}" state=latest
   with_items:
     - sbt
+  register: install_sbt
+
+- name: Get sbt version
+  tags:
+    - sbt
+  shell: sbt sbtBinaryVersion | tail -1 | sed -E 's/^.*([0-9].[0-9]+).*$/\1/'
+  register: sbt_version
+  when: install_sbt | changed
+
+- name: Add sbt plugins
+  tags:
+    - sbt
+  lineinfile: dest=~/.sbt/{{sbt_version.stdout}}/plugins/plugins.sbt state=present create=yes
+    regexp="^{{item}}$"
+    line="addSbtPlugin({{item}})"
+  with_items: "{{sbt_plugins}}"
+  when: install_sbt | changed
