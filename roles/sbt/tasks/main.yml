@@ -1,0 +1,14 @@
+- name: Install latest version of java
+  tags:
+    - sbt
+  homebrew_cask: name={{item}} state=present
+  with_items:
+    - java
+    - jce-unlimited-strength-policy
+
+- name: Install packages
+  tags:
+    - sbt
+  homebrew: name="{{item}}" state=latest
+  with_items:
+    - sbt
