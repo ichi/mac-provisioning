@@ -20,3 +20,8 @@
     - php
   shell: phpbrew self-update
   when: install_phpbrew | changed
+
+- name: Install composer
+  tags:
+    - php
+  homebrew: name=composer state=latest
