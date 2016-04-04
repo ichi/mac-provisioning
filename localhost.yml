@@ -53,12 +53,15 @@
       - firefox
       - google-chrome
       - google-japanese-ime
+      - intellij-idea-ce
       - istat-menus
       - iterm2
       - karabiner
       - mailplane
+      - pg-commander
+      - sequel-pro
       - slack
-      # - teleport
+      - teleport
       - totalfinder
       - totalspaces
       - totalterminal
