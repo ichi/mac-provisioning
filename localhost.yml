@@ -10,6 +10,7 @@
     - ruby
     - sbt
     - php
+    - bin
 
   vars:
     homebrew_repositories:

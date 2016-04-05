@@ -1,0 +1,12 @@
+- name: Create bin directory
+  tags:
+    - bin
+  file: path=~/bin state=directory
+
+- name: Link git-new-workdir
+  tags:
+    - bin
+  file: >
+    src=/usr/local/share/git-core/contrib/workdir/git-new-workdir
+    dest=~/bin/git-new-workdir
+    state=link
