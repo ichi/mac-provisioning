@@ -53,6 +53,5 @@
 - name: chshでログインシェル変更
   tags:
     - zsh
-  become: true
   shell: chsh -s {{zsh_path}}
   when: etc_shells | changed
