@@ -34,3 +34,7 @@ $ HOMEBREW_CASK_OPTS="--appdir=/Applications" ansible-playbook -i hosts localhos
 ### iStat Menus
 
 - Import Settingsで`~/Dropbox/_private/mac/iStatMenus/iStat Menus Settings.ismp`
+
+### IntelliJ Idea
+
+- `File -> Settings Repository`で`git@github.com:ichi/intellij-settings.git`を設定
