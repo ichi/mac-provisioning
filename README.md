@@ -32,4 +32,5 @@ $ HOMEBREW_CASK_OPTS="--appdir=/Applications" ansible-playbook -i hosts localhos
 - 設定の`Syncing`で`~/Dropbox/_private/mac/Dash`指定
 
 ### iStat Menus
+
 - Import Settingsで`~/Dropbox/_private/mac/iStatMenus/iStat Menus Settings.ismp`
