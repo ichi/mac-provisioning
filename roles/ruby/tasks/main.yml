@@ -54,9 +54,3 @@
     - ruby
     - rbenv
   gem: name=bundler state=latest
-
-- name: Install pry
-  tags:
-    - ruby
-    - rbenv
-  gem: name=pry state=latest
