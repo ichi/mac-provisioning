@@ -62,6 +62,7 @@
       - mailplane
       - night-owl
       - pg-commander
+      - pgadmin3
       - sequel-pro
       - slack
       - teleport
