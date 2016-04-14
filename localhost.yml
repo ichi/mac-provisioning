@@ -17,6 +17,7 @@
       - homebrew/versions
 
     homebrew_packages:
+      - ag
       - ansible
       - awscli
       - colordiff
