@@ -2,3 +2,9 @@
   tags:
     - bin
   file: path=~/bin state=directory
+
+- name: Copy files
+  tags:
+    - bin
+  copy: src={{item}} dest=~/bin/ mode="755"
+  with_fileglob: "*"

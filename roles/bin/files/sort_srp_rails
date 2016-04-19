@@ -1,0 +1,2 @@
+#!/bin/sh
+sort_srp `git ls-files app lib config vendor script | grep -E '\.rb$'`
