@@ -1,0 +1,7 @@
+- name: IPv6のlocalhostコメントアウト
+  tags:
+    - hosts
+  lineinfile: dest=/etc/hosts
+    regexp='^::1\s+localhost$'
+    line="#::1 localhost"
+  become: true
