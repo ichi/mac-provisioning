@@ -10,6 +10,7 @@
     - ruby
     - sbt
     - php
+    - hosts
     - bin
 
   vars:
@@ -67,6 +68,7 @@
       - postico
       - sequel-pro
       - slack
+      - sqlitebrowser
       - teleport
       - totalfinder
       - totalspaces
