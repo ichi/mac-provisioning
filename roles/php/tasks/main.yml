@@ -25,3 +25,8 @@
   tags:
     - php
   homebrew: name=composer state=latest
+
+- name: Install php-cs-fixer
+  tags:
+    - php
+  homebrew: name=php-cs-fixer state=latest
